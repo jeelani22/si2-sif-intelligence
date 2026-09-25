@@ -27,7 +27,7 @@ def analyze_sif_precursor(report_data: Dict[str, Any]) -> Dict[str, Any]:
         identified_hazards = ["Energy Isolation", "Electrical Energy"]
         life_saving_rules.append("Energy Isolation")
         if any(k in text for k in ["not verified", "omitted", "without", "failed", "forgot", "unverified"]):
-            why_flagged_reasons.append("Analysis detected a failure in verification protocols for energy isolation, a high-frequency SIF precursor.")
+            why_flagged_reasons.append("Analysis detected a failure in verification protocols for energy isolation, indicating a potential SIF precursor.")
         else:
             why_flagged_reasons.append("Energy isolation hazard identified in maintenance perimeter.")
         related_reports = ["R001", "R017", "R043", "R081", "R104"]
@@ -87,13 +87,13 @@ def analyze_sif_precursor(report_data: Dict[str, Any]) -> Dict[str, Any]:
     risk_level = "HIGH" if final_score >= 70 else ("MEDIUM" if final_score >= 40 else "LOW")
     reasons_text = " ".join(why_flagged_reasons)
     pattern_status = "ESCALATED" if escalation_triggered else "STABLE"
-    pattern_message = "Potential SIF risk increased due to recurring related observations." if escalation_triggered else "Observation recorded in baseline monitoring."
+    pattern_message = "Potential SIF risk increased due to recurring related observations and an increasing review-priority trajectory." if escalation_triggered else "Observation recorded in baseline monitoring."
 
     pattern_tags = [
         "Same location",
         "Same hazard",
         "Repeated related observations",
-        "Increasing risk trajectory"
+        "Increasing review-priority trajectory"
     ] if escalation_triggered else ["Isolated observation", "Standard baseline monitoring"]
 
     return {
