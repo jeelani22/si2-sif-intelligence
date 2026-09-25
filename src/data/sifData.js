@@ -27,7 +27,7 @@ export const SIF_DATA = {
       id: 2,
       level: "HIGH",
       riskScore: 78,
-      title: "Increasing risk trajectory detected - Tank Farm",
+      title: "Increasing review-priority trajectory detected - Tank Farm",
       location: "Tank Farm",
       status: "Action Required",
       time: "25m ago"

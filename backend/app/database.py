@@ -37,7 +37,7 @@ IN_MEMORY_DB: Dict[str, Dict[str, Any]] = {
             "caseId": "SIF-0240",
             "level": "HIGH",
             "riskScore": 78,
-            "title": "Increasing risk trajectory detected - Tank Farm",
+            "title": "Increasing review-priority trajectory detected - Tank Farm",
             "location": "Tank Farm",
             "status": "Action Required",
             "borderClass": "border-[#ba1a1a]",
