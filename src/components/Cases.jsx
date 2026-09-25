@@ -50,7 +50,8 @@ export default function Cases({ selectedCaseId, setSelectedCaseId, onNavigate, o
         status: 'ACTION IN PROGRESS',
         correctiveAction: {
           text: currentCase.correctiveAction?.text || "Immediate Action: Stop affected maintenance activity and verify energy isolation before work resumes.",
-          assignedTo: currentCase.correctiveAction?.assignedTo || "R. Sharma",
+          assignedTo: currentCase.correctiveAction?.assignedTo || "HSE Engineer A",
+          assignedRole: currentCase.correctiveAction?.assignedRole || "HSE Engineer",
           priority: currentCase.correctiveAction?.priority || "Critical",
           due: currentCase.correctiveAction?.due || "TODAY, 14:30"
         }
@@ -95,7 +96,7 @@ export default function Cases({ selectedCaseId, setSelectedCaseId, onNavigate, o
     setActionInProgress(true);
     try {
       const patchData = {
-        verification: "Verified by HSE Area Lead & Shift Supervisor"
+        verification: "Verified by HSE Reviewer A"
       };
       const res = await apiClient.updateCase(currentCase.id, patchData);
       if (res) {
@@ -103,7 +104,7 @@ export default function Cases({ selectedCaseId, setSelectedCaseId, onNavigate, o
         setCasesList(casesList.map((c) => (c.id === res.id ? res : c)));
       }
       if (onNotification) {
-        onNotification(`Case ${currentCase.id} verified and closed by supervisor.`);
+        onNotification(`Case ${currentCase.id} verified and closed by HSE Reviewer A.`);
       }
     } catch (e) {
       if (onNotification) onNotification('Verification error.');
@@ -114,7 +115,7 @@ export default function Cases({ selectedCaseId, setSelectedCaseId, onNavigate, o
 
   const handleExport = () => {
     const rows = [
-      ['Case ID', 'Type', 'Hazard', 'Location', 'Risk', 'SIF Potential', 'Assigned To', 'Status'],
+      ['Case ID', 'Type', 'Hazard', 'Location', 'Review Priority', 'SIF Potential', 'Assigned To', 'Status'],
       ...casesList.map((c) => [c.id, c.type, c.hazard, c.location, c.risk, c.sifPotential, c.assignedTo, c.status]),
     ];
     const csvContent = 'data:text/csv;charset=utf-8,' + rows.map((e) => e.join(',')).join('\n');
@@ -138,7 +139,7 @@ export default function Cases({ selectedCaseId, setSelectedCaseId, onNavigate, o
       <header className="flex justify-between items-start">
         <div className="flex flex-col gap-0.5">
           <h1 className="font-display-lg text-[28px] text-primary font-bold tracking-tight uppercase">CASES</h1>
-          <p className="font-body-md text-sm text-secondary">Track potential SIF cases from detection through verified closure.</p>
+          <p className="font-body-md text-sm text-secondary">Track Potential-SIF cases from detection through corrective action, verification and closure.</p>
         </div>
         <div className="flex items-center gap-3">
           <button 
@@ -170,7 +171,7 @@ export default function Cases({ selectedCaseId, setSelectedCaseId, onNavigate, o
         </div>
       </section>
 
-      {/* 60/40 Split View (Image 4) */}
+      {/* 60/40 Split View */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-element-gap items-start">
         {/* Left: SIF Case Management Table (60% -> 7-col) */}
         <div className="lg:col-span-7 bg-surface-container-lowest border border-outline-variant flex flex-col overflow-hidden">
@@ -186,7 +187,7 @@ export default function Cases({ selectedCaseId, setSelectedCaseId, onNavigate, o
                   <th className="p-3">TYPE</th>
                   <th className="p-3">HAZARD</th>
                   <th className="p-3">LOCATION</th>
-                  <th className="p-3">RISK</th>
+                  <th className="p-3">REVIEW PRIORITY</th>
                   <th className="p-3">SIF POTENTIAL</th>
                   <th className="p-3">ASSIGNED TO</th>
                   <th className="p-3">STATUS</th>
@@ -257,15 +258,27 @@ export default function Cases({ selectedCaseId, setSelectedCaseId, onNavigate, o
           </div>
         </div>
 
-        {/* Right: Detailed Case Dossier (40% -> 5-col) (Image 4) */}
+        {/* Right: Detailed Case Dossier (40% -> 5-col) */}
         <div className="lg:col-span-5 bg-surface-container-lowest border border-outline-variant flex flex-col p-5 gap-4">
           {/* Header */}
           <div className="flex justify-between items-center border-b border-outline-variant pb-3">
             <div>
               <h2 className="font-bold text-primary text-lg leading-tight">{currentCase.id}</h2>
-              <span className="text-xs text-[#dc2626] font-bold">🔴 CRITICAL • RISK {currentCase.risk}</span>
+              <span className="text-xs text-[#dc2626] font-bold">🔴 CRITICAL · REVIEW PRIORITY {currentCase.risk}</span>
             </div>
             <span className="text-xs text-secondary font-mono-label">{currentCase.status}</span>
+          </div>
+
+          {/* Assignment Detail & Demo Notice */}
+          <div className="flex justify-between items-start bg-surface-container-low p-2.5 rounded border border-outline-variant">
+            <div className="flex flex-col">
+              <span className="font-label-md text-[10px] text-secondary uppercase font-bold">ASSIGNED TO</span>
+              <span className="text-xs font-bold text-primary">{currentCase.assignedTo || "HSE Engineer A"}</span>
+              <span className="text-[10px] text-secondary font-medium">ROLE: {currentCase.assignedRole || "HSE Engineer"}</span>
+            </div>
+            <span className="text-[10px] text-secondary bg-surface-container px-2 py-0.5 rounded border border-outline-variant italic">
+              Demo Scenario — Hypothetical Assignment
+            </span>
           </div>
 
           {/* Risk Origin & Related Reports */}
@@ -284,19 +297,20 @@ export default function Cases({ selectedCaseId, setSelectedCaseId, onNavigate, o
           </div>
 
           <div className="flex flex-col gap-1">
-            <span className="font-label-md text-[10px] text-secondary uppercase font-bold">RISK TRAJECTORY</span>
+            <span className="font-label-md text-[10px] text-secondary uppercase font-bold">REVIEW-PRIORITY TRAJECTORY</span>
             <p className="text-xs font-mono-label font-bold text-primary">{currentCase.riskTrajectory || "22 → 39 → 57 → 76 → 91"}</p>
+            <span className="text-[10px] text-secondary italic">Illustrative review-priority scores; not calibrated probabilities of injury or fatality.</span>
           </div>
 
           <div className="flex flex-col gap-1">
             <span className="font-label-md text-[10px] text-secondary uppercase font-bold">WHY ESCALATED</span>
-            <p className="text-xs text-primary font-medium">Potential SIF risk increased due to recurring related observations.</p>
+            <p className="text-xs text-primary font-medium">Potential-SIF review priority increased due to recurring related observations.</p>
             <ul className="list-none space-y-0.5 mt-1 text-secondary">
               {(currentCase.whyEscalated || [
                 "Repeated energy isolation observations",
                 "Same process area",
                 "Same equipment",
-                "Increasing risk trajectory",
+                "Increasing review-priority trajectory",
                 "Related Life-Saving Rule concern"
               ]).map((item, idx) => (
                 <li key={idx} className="text-xs text-primary leading-tight">• {item}</li>
@@ -321,11 +335,16 @@ export default function Cases({ selectedCaseId, setSelectedCaseId, onNavigate, o
                 {currentCase.correctiveAction.text}
               </p>
               <div className="grid grid-cols-2 gap-2 text-[10px] pt-1 border-t border-[#fed7aa]">
-                <div><span className="text-secondary">ASSIGNED TO:</span> <strong className="text-primary block">{currentCase.correctiveAction.assignedTo}</strong></div>
+                <div>
+                  <span className="text-secondary">ASSIGNED TO:</span> 
+                  <strong className="text-primary block">{currentCase.correctiveAction.assignedTo}</strong>
+                  <span className="text-secondary text-[9px] block">ROLE: {currentCase.correctiveAction.assignedRole || "HSE Engineer"}</span>
+                </div>
                 <div><span className="text-secondary">PRIORITY:</span> <strong className="text-error block">{currentCase.correctiveAction.priority}</strong></div>
               </div>
-              <div className="text-[10px] text-secondary font-mono-label">
-                ⏰ DUE: <strong className="text-primary">{currentCase.correctiveAction.due}</strong>
+              <div className="flex items-center justify-between text-[10px] text-secondary font-mono-label">
+                <div>⏰ DUE: <strong className="text-primary">{currentCase.correctiveAction.due}</strong></div>
+                <span className="text-[9px] text-[#9a3412] italic font-sans">Demo Scenario — Hypothetical Assignment</span>
               </div>
             </div>
           )}

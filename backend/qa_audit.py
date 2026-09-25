@@ -136,13 +136,13 @@ def run_qa_audit():
         action_payload = {
             "correctiveAction": {
                 "text": "Immediate Action: Stop affected maintenance activity and verify energy isolation before work resumes.",
-                "assignedTo": "R. Sharma",
+                "assignedTo": "HSE Engineer A",
                 "priority": "Critical",
                 "due": "TODAY, 14:30"
             }
         }
         s, r = send_req(f"{base_api}/cases/SIF-0241", method="PATCH", data=action_payload, headers={"Content-Type": "application/json"})
-        action_ok = s == 200 and r.get("correctiveAction", {}).get("assignedTo") == "R. Sharma"
+        action_ok = s == 200 and r.get("correctiveAction", {}).get("assignedTo") == "HSE Engineer A"
         results["Update Action Plan (PATCH /api/cases/{id})"] = "PASS" if action_ok else "FAIL"
     except Exception as e:
         results["Update Action Plan (PATCH /api/cases/{id})"] = f"FAIL ({e})"
@@ -161,7 +161,7 @@ def run_qa_audit():
     # 11. Verify Corrective Action (Supervisor Action)
     try:
         verify_payload = {
-            "verification": "Verified by HSE Area Lead & Shift Supervisor"
+            "verification": "Verified by HSE Reviewer A"
         }
         s, r = send_req(f"{base_api}/cases/SIF-0241", method="PATCH", data=verify_payload, headers={"Content-Type": "application/json"})
         ver_ok = s == 200 and r.get("status") == "CLOSED" and r.get("verification") != "Pending Evidence"

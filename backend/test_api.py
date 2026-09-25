@@ -52,7 +52,7 @@ if __name__ == "__main__":
         "location": "Process Area A",
         "risk": 91,
         "sifPotential": "Y",
-        "assignedTo": "J. Thompson",
+        "assignedTo": "HSE Engineer A",
         "status": "ACTION IN PROGRESS"
     })
     test_api("PATCH", "/api/cases/SIF-0241", {

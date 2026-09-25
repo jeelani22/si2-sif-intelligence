@@ -48,7 +48,7 @@ def test_cases_lifecycle():
 
     print("\n=== 4. SUPERVISOR VERIFICATION (PATCH /api/cases/SIF-0241) ===")
     verify_payload = {
-        "verification": "Verified by HSE Area Lead & Shift Supervisor"
+        "verification": "Verified by HSE Reviewer A"
     }
     req = urllib.request.Request(f"{base_url}/SIF-0241", data=json.dumps(verify_payload).encode("utf-8"), method="PATCH")
     req.add_header("Content-Type", "application/json")

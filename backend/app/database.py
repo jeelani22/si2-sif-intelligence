@@ -134,7 +134,8 @@ INITIAL_CASES = [
         "location": "Process Area A",
         "risk": 91,
         "sifPotential": "Y",
-        "assignedTo": "J. Thompson",
+        "assignedTo": "HSE Engineer A",
+        "assignedRole": "HSE Engineer",
         "status": "ACTION IN PROGRESS",
         "riskOrigin": "Recurring Pattern Escalation",
         "relatedReports": ["R001", "R017", "R043", "R081", "R104"],
@@ -143,12 +144,13 @@ INITIAL_CASES = [
             "Repeated energy isolation observations",
             "Same process area",
             "Same equipment",
-            "Increasing risk trajectory",
+            "Increasing review-priority trajectory",
             "Related Life-Saving Rule concern"
         ],
         "correctiveAction": {
             "text": "Immediate Action: Stop affected maintenance activity and verify energy isolation before work resumes.",
-            "assignedTo": "R. Sharma",
+            "assignedTo": "HSE Engineer A",
+            "assignedRole": "HSE Engineer",
             "priority": "Critical",
             "due": "TODAY, 14:30"
         },
@@ -166,7 +168,7 @@ INITIAL_CASES = [
         "auditTrail": [
             { "time": "12:42", "text": "Potential SIF precursor detected" },
             { "time": "12:43", "text": "Recurring pattern escalation generated" },
-            { "time": "12:47", "text": "Case assigned to R. Sharma" },
+            { "time": "12:47", "text": "Case assigned to HSE Engineer A" },
             { "time": "13:05", "text": "Corrective action started" }
         ]
     },
@@ -177,7 +179,8 @@ INITIAL_CASES = [
         "location": "Tank Farm",
         "risk": 78,
         "sifPotential": "Y",
-        "assignedTo": "R. Miller",
+        "assignedTo": "HSE Engineer B",
+        "assignedRole": "HSE Engineer",
         "status": "ASSIGNED",
         "riskOrigin": "Atmospheric Sensor Anomaly",
         "relatedReports": ["R022", "R055", "R094"],
@@ -189,7 +192,8 @@ INITIAL_CASES = [
         ],
         "correctiveAction": {
             "text": "Lockout access manway and re-route positive ventilation air ducts.",
-            "assignedTo": "R. Miller",
+            "assignedTo": "HSE Engineer B",
+            "assignedRole": "HSE Engineer",
             "priority": "High",
             "due": "TODAY, 16:00"
         },
@@ -206,7 +210,7 @@ INITIAL_CASES = [
         "verification": "Pending Evidence",
         "auditTrail": [
             { "time": "11:15", "text": "Precursor event detected" },
-            { "time": "11:20", "text": "Assigned to R. Miller" }
+            { "time": "11:20", "text": "Assigned to HSE Engineer B" }
         ]
     },
     {
@@ -216,7 +220,8 @@ INITIAL_CASES = [
         "location": "Maintenance Zone",
         "risk": 72,
         "sifPotential": "Y",
-        "assignedTo": "S. Garcia",
+        "assignedTo": "Maintenance Engineer A",
+        "assignedRole": "Maintenance Engineer",
         "status": "ALERTED",
         "riskOrigin": "100% Tie-Off Rule Non-Compliance",
         "relatedReports": ["R011", "R038", "R089"],
@@ -227,7 +232,8 @@ INITIAL_CASES = [
         ],
         "correctiveAction": {
             "text": "Install static horizontal lifeline cable along PR-2.",
-            "assignedTo": "S. Garcia",
+            "assignedTo": "Maintenance Engineer A",
+            "assignedRole": "Maintenance Engineer",
             "priority": "High",
             "due": "TOMORROW, 10:00"
         },
@@ -253,7 +259,8 @@ INITIAL_CASES = [
         "location": "Utilities",
         "risk": 24,
         "sifPotential": "N",
-        "assignedTo": "T. Lee",
+        "assignedTo": "Safety Officer A",
+        "assignedRole": "Safety Officer",
         "status": "CLOSED",
         "riskOrigin": "Routine Housekeeping",
         "relatedReports": ["R005"],
@@ -261,7 +268,8 @@ INITIAL_CASES = [
         "whyEscalated": ["Standard low-energy particle deflection."],
         "correctiveAction": {
             "text": "Replaced spark face shield at bay 3.",
-            "assignedTo": "T. Lee",
+            "assignedTo": "Safety Officer A",
+            "assignedRole": "Safety Officer",
             "priority": "Low",
             "due": "COMPLETED"
         },
@@ -275,7 +283,7 @@ INITIAL_CASES = [
             { "name": "CLOSED", "completed": True, "active": False }
         ],
         "evidence": "Verified",
-        "verification": "Supervisor Signoff",
+        "verification": "HSE Reviewer A Signoff",
         "auditTrail": [
             { "time": "09:00", "text": "Observation logged" },
             { "time": "09:30", "text": "Resolved and closed" }
