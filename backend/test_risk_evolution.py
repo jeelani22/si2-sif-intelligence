@@ -28,8 +28,8 @@ def test_risk_evolution():
         expected = [
             ("R001", 22, "Non-SIF"),
             ("R017", 39, "Non-SIF"),
-            ("R043", 57, "Rising Risk"),
-            ("R081", 76, "High Risk"),
+            ("R043", 57, "Rising Review Priority"),
+            ("R081", 76, "High Priority"),
             ("R104", 91, "Potential SIF")
         ]
 

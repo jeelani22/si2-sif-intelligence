@@ -272,30 +272,29 @@ export const SIF_DATA = {
     currentRiskScore: 91,
     maxScore: 100,
     statusBadges: ["CRITICAL", "ESCALATED"],
-    logicBanner: "Non-SIF reports remain in the intelligence pipeline. Recurring related observations + increasing risk trajectory = emerging Potential SIF risk.",
-    escalationMessage: "Potential SIF risk increased due to recurring related observations.",
+    logicBanner: "Non-SIF reports remain in the intelligence pipeline. Recurring related observations + increasing review-priority trajectory = emerging Potential-SIF concern.",
+    escalationMessage: "Potential-SIF review priority increased due to recurring related observations.",
     trajectoryPoints: [
       { id: "R001", risk: 22, band: "NON-SIF", classification: "Non-SIF", status: "MONITORING", title: "Initial unsafe condition identified during shift turnover" },
-      { id: "R017", risk: 39, band: "NON-SIF", classification: "Non-SIF", status: "RELATED", title: "Related LOTO station observation reported" },
-      { id: "R043", risk: 57, band: "NON-SIF", classification: "Rising Risk", status: "RISING", title: "Breaker handle stiff / risk escalating due to proximity" },
-      { id: "R081", risk: 76, band: "RISING RISK", classification: "High Risk", status: "PATTERN DETECTED", title: "Recurring hazard pattern confirmed in junction box" },
-      { id: "R104", risk: 91, band: "POTENTIAL SIF", classification: "Potential SIF", status: "ESCALATED", title: "Critical threshold reached - Potential SIF designated" }
+      { id: "R017", risk: 39, band: "NON-SIF", classification: "Non-SIF", status: "RELATED", title: "Related observation reported" },
+      { id: "R043", risk: 57, band: "NON-SIF", classification: "Rising Review Priority", status: "RISING", title: "Review priority escalating due to proximity" },
+      { id: "R081", risk: 76, band: "RISING REVIEW PRIORITY", classification: "High Priority", status: "PATTERN DETECTED", title: "Recurring hazard pattern confirmed in junction box" },
+      { id: "R104", risk: 91, band: "POTENTIAL SIF", classification: "Potential SIF", status: "ESCALATED", title: "Review-priority threshold reached — Potential SIF designated" }
     ],
     checklist: [
       { text: "Same location (Process Area A)", checked: true },
       { text: "Same equipment (Pump P-101)", checked: true },
       { text: "Same hazard", checked: true },
       { text: "Repeated related observations", checked: true },
-      { text: "Increasing frequency", checked: true },
-      { text: "Increasing risk scores", checked: true, isTrend: true },
-      { text: "Life-Saving Rule concern (Energy Isolation)", checked: true, isAlert: true }
+      { text: "Increasing review-priority trajectory", checked: true, isTrend: true },
+      { text: "Energy Isolation concern — Critical Life-Saving Rule", checked: true, isAlert: true }
     ],
     timeline: [
       { id: "R001", risk: 22, badge: "MONITORING", title: "Initial unsafe condition identified", isLatest: false },
       { id: "R017", risk: 39, badge: "RELATED", title: "Related observation reported", isLatest: false },
-      { id: "R043", risk: 57, badge: "RISING", title: "Risk escalating due to proximity", isLatest: false },
+      { id: "R043", risk: 57, badge: "RISING", title: "Review priority escalating due to proximity", isLatest: false },
       { id: "R081", risk: 76, badge: "PATTERN DETECTED", title: "Recurring hazard pattern confirmed", isLatest: false },
-      { id: "R104", risk: 91, badge: "ESCALATED", title: "Critical threshold reached - Potential SIF designated", isLatest: true }
+      { id: "R104", risk: 91, badge: "ESCALATED", title: "Review-priority threshold reached — Potential SIF designated", isLatest: true }
     ],
     relatedReports: [
       { id: "R081", risk: 76, title: "Unsafe Act - Lockout tag missing" },

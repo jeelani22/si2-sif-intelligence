@@ -23,9 +23,9 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
     : [
         { id: "R001", risk: 22, band: "NON-SIF", classification: "Non-SIF", status: "MONITORING", title: "Initial unsafe condition identified" },
         { id: "R017", risk: 39, band: "NON-SIF", classification: "Non-SIF", status: "RELATED", title: "Related observation reported" },
-        { id: "R043", risk: 57, band: "NON-SIF", classification: "Rising Risk", status: "RISING", title: "Risk escalating due to proximity" },
-        { id: "R081", risk: 76, band: "RISING RISK", classification: "High Risk", status: "PATTERN DETECTED", title: "Recurring hazard pattern confirmed" },
-        { id: "R104", risk: 91, band: "POTENTIAL SIF", classification: "Potential SIF", status: "ESCALATED", title: "Critical threshold reached - Potential SIF designated" }
+        { id: "R043", risk: 57, band: "NON-SIF", classification: "Rising Review Priority", status: "RISING", title: "Review priority escalating due to proximity" },
+        { id: "R081", risk: 76, band: "RISING REVIEW PRIORITY", classification: "High Priority", status: "PATTERN DETECTED", title: "Recurring hazard pattern confirmed" },
+        { id: "R104", risk: 91, band: "POTENTIAL SIF", classification: "Potential SIF", status: "ESCALATED", title: "Review-priority threshold reached — Potential SIF designated" }
       ];
 
   const currentReport = trajectoryPoints.find((p) => p.id === selectedReportId) 
@@ -45,7 +45,7 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
     setSelectedReportId(id);
     const selected = trajectoryPoints.find((p) => p.id === id);
     if (onNotification && selected) {
-      onNotification(`Selected Report ${id}: Risk ${selected.risk}/100 • ${selected.classification || selected.status}`);
+      onNotification(`Selected Report ${id}: Review Priority ${selected.risk}/100 • ${selected.classification || selected.status}`);
     }
   };
 
@@ -58,7 +58,7 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
   };
 
   const handleReassessSif = () => {
-    if (onNotification) onNotification('SIF Risk Reassessed: Potential SIF designation active due to recurring pattern.');
+    if (onNotification) onNotification('SIF Review Priority Reassessed: Potential-SIF designation active due to recurring pattern.');
   };
 
   const curRisk = currentReport.risk ?? 91;
@@ -68,10 +68,10 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
       {/* Header */}
       <header className="flex flex-col gap-0.5">
         <h1 className="font-display-lg text-[28px] text-primary font-bold tracking-tight uppercase">RISK EVOLUTION</h1>
-        <p className="font-body-md text-sm text-secondary">Track how potential SIF risk changes as new related safety observations are reported.</p>
+        <p className="font-body-md text-sm text-secondary">Track how review priority evolves as new related safety observations are reported.</p>
       </header>
 
-      {/* Context Banner Card (Image 5) */}
+      {/* Context Banner Card */}
       <div className="bg-surface-container-lowest border border-outline-variant p-4 flex flex-wrap justify-between items-center gap-4">
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">
@@ -91,7 +91,7 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
         </div>
 
         <div className="text-right">
-          <span className="font-label-md text-[10px] text-secondary uppercase block font-bold">CURRENT RISK SCORE ({selectedReportId})</span>
+          <span className="font-label-md text-[10px] text-secondary uppercase block font-bold">CURRENT REVIEW PRIORITY ({selectedReportId})</span>
           <div className="font-mono-label text-error font-bold leading-none mt-1">
             <span className="text-3xl">{curRisk}</span>
             <span className="text-xs text-secondary">/100</span>
@@ -105,24 +105,24 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
         <span className="material-symbols-outlined text-sm text-[#1e40af]">lightbulb</span>
         <div className="text-xs text-[#1e3a8a] leading-relaxed">
           <strong className="font-label-md uppercase font-bold text-[#1e40af] block mb-0.5">CONTINUOUS MONITORING LOGIC</strong>
-          {riskEvolution.logicBanner || "Non-SIF reports remain in the intelligence pipeline. Recurring related observations + increasing risk trajectory = emerging Potential SIF risk."}
+          {riskEvolution.logicBanner || "Non-SIF reports remain in the intelligence pipeline. Recurring related observations + increasing review-priority trajectory = emerging Potential-SIF concern."}
         </div>
       </div>
 
-      {/* Continuous Risk Reassessment Trajectory Chart (Image 5) */}
+      {/* Continuous Review-Priority Reassessment Trajectory Chart */}
       <section className="bg-surface-container-lowest border border-outline-variant p-5 flex flex-col gap-3">
         <div className="flex justify-between items-center">
-          <h3 className="font-label-md text-xs text-primary uppercase font-bold">CONTINUOUS RISK REASSESSMENT</h3>
+          <h3 className="font-label-md text-xs text-primary uppercase font-bold">CONTINUOUS REVIEW-PRIORITY REASSESSMENT</h3>
           <span className="text-xs text-secondary font-mono-label">Active Point: <strong className="text-primary">{selectedReportId} ({curRisk}/100)</strong></span>
         </div>
 
         <div className="relative h-64 w-full border border-slate-200 bg-white overflow-hidden p-6 flex flex-col justify-between">
-          {/* Colored Risk Bands */}
+          {/* Colored Risk / Review-Priority Bands */}
           <div className="absolute top-0 left-0 right-0 h-[28%] bg-[#fef2f2] opacity-70 border-b border-[#fecaca] flex items-start p-2 pointer-events-none">
             <span className="text-[10px] font-bold text-[#b91c1c] uppercase tracking-wider">POTENTIAL SIF (70–100)</span>
           </div>
           <div className="absolute top-[28%] left-0 right-0 h-[28%] bg-[#f8faff] opacity-60 border-b border-slate-200 flex items-start p-2 pointer-events-none">
-            <span className="text-[10px] font-bold text-[#475569] uppercase tracking-wider">RISING RISK (45–70)</span>
+            <span className="text-[10px] font-bold text-[#475569] uppercase tracking-wider">RISING REVIEW PRIORITY (45–70)</span>
           </div>
           <div className="absolute bottom-0 left-0 right-0 h-[44%] bg-white flex items-start p-2 pointer-events-none">
             <span className="text-[10px] font-bold text-[#94a3b8] uppercase tracking-wider">NON-SIF (0–45)</span>
@@ -195,6 +195,11 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
           </div>
         </div>
 
+        {/* Score Clarification Note */}
+        <p className="text-[11px] text-secondary italic">
+          Illustrative review-priority scores generated by the prototype's explainable scoring logic; not calibrated probabilities of injury or fatality.
+        </p>
+
         {/* 4 Methodology Continuous Reassessment Buttons */}
         <div className="flex items-center justify-between text-[11px] font-bold text-center gap-2 overflow-x-auto pt-2">
           <button 
@@ -227,11 +232,11 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
         </div>
       </section>
 
-      {/* 2-Column Split: Why Did Risk Increase & Escalation Triggered */}
+      {/* 2-Column Split: Why Did Review Priority Increase & Escalation Triggered */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-element-gap">
-        {/* Left (7-col): Why Did Risk Increase? Checklist */}
+        {/* Left (7-col): Why Did Review Priority Increase? Checklist */}
         <div className="lg:col-span-7 bg-surface-container-lowest border border-outline-variant p-5 flex flex-col justify-between gap-4">
-          <h3 className="font-label-md text-xs text-primary uppercase font-bold">WHY DID RISK INCREASE?</h3>
+          <h3 className="font-label-md text-xs text-primary uppercase font-bold">WHY DID REVIEW PRIORITY INCREASE?</h3>
 
           <div className="grid grid-cols-2 gap-3 text-xs">
             <div className="flex items-center gap-2 text-primary font-medium">
@@ -246,16 +251,13 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
             <div className="flex items-center gap-2 text-primary font-medium">
               <span className="text-primary font-bold">✓</span> Repeated related observations
             </div>
-            <div className="flex items-center gap-2 text-primary font-medium">
-              <span className="text-primary font-bold">✓</span> Increasing frequency
-            </div>
-            <div className="flex items-center gap-2 text-[#dc2626] font-semibold">
-              <span className="material-symbols-outlined text-sm text-[#dc2626]">trending_up</span> Increasing risk scores
+            <div className="flex items-center gap-2 text-[#dc2626] font-semibold col-span-2">
+              <span className="material-symbols-outlined text-sm text-[#dc2626]">trending_up</span> Increasing review-priority trajectory
             </div>
           </div>
 
           <div className="border-t border-outline-variant pt-3 flex items-center gap-2 text-xs text-[#dc2626] font-bold">
-            <span className="material-symbols-outlined text-sm">warning</span> Energy Isolation concern - Critical Life-Saving Rule
+            <span className="material-symbols-outlined text-sm">warning</span> Energy Isolation concern — Critical Life-Saving Rule
           </div>
         </div>
 
@@ -268,9 +270,9 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="bg-[#fef2f2] text-[#b91c1c] text-[10px] font-bold px-2 py-0.5 rounded border border-[#fca5a5]">
-                  {currentReport.classification || "CRITICAL"}
+                  {currentReport.classification || "Potential SIF"}
                 </span>
-                <span className="text-xs text-[#b91c1c] font-bold font-mono-label">• RISK {curRisk}</span>
+                <span className="text-xs text-[#b91c1c] font-bold font-mono-label">• REVIEW PRIORITY {curRisk}</span>
               </div>
               <h4 className="font-bold text-primary text-base">Repeated energy-isolation concern</h4>
               <p className="text-xs text-secondary flex items-center gap-1 mt-0.5">
@@ -279,7 +281,7 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
             </div>
 
             <div className="bg-[#fef2f2] border border-[#fca5a5] p-2.5 rounded text-xs text-[#991b1b] font-medium leading-tight">
-              {riskEvolution.escalationMessage || "Potential SIF risk increased due to recurring related observations."}
+              {riskEvolution.escalationMessage || "Potential-SIF review priority increased due to recurring related observations."}
             </div>
 
             <button 
@@ -292,7 +294,7 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
         </div>
       </section>
 
-      {/* Bottom 2-Column Split: Risk Timeline & Related Reports (Image 5) */}
+      {/* Bottom 2-Column Split: Risk Timeline & Related Reports */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-element-gap">
         {/* Left: Risk Timeline Stepper */}
         <div className="lg:col-span-8 bg-surface-container-lowest border border-outline-variant p-5 flex flex-col gap-4">
@@ -302,6 +304,11 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
             {trajectoryPoints.map((item) => {
               const isSelected = item.id === selectedReportId;
               const isLatest = item.id === 'R104';
+
+              let displayTitle = item.title;
+              if (item.id === 'R104') {
+                displayTitle = "Review-priority threshold reached — Potential SIF designated";
+              }
 
               return (
                 <div 
@@ -322,7 +329,7 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
                     <div className="flex justify-between items-center text-xs">
                       <div className="flex items-center gap-2">
                         <span className={`font-mono-label font-bold ${isLatest ? 'text-error' : 'text-primary'}`}>{item.id}</span>
-                        <span className={`text-[11px] ${isLatest ? 'text-error font-bold font-mono-label' : 'text-secondary'}`}>Risk {item.risk}</span>
+                        <span className={`text-[11px] ${isLatest ? 'text-error font-bold font-mono-label' : 'text-secondary'}`}>Review Priority {item.risk}</span>
                       </div>
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
                         isLatest
@@ -330,7 +337,7 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
                           : (item.status === 'RISING' ? 'bg-[#f3e8ff] text-[#6b21a8] border border-[#e9d5ff]' : (item.status === 'PATTERN DETECTED' ? 'bg-[#dbeafe] text-[#1e40af] border border-[#bfdbfe]' : 'bg-surface-container text-secondary'))
                       }`}>{item.status}</span>
                     </div>
-                    <p className={`text-xs mt-0.5 ${isLatest ? 'text-primary font-medium' : 'text-secondary'}`}>{item.title}</p>
+                    <p className={`text-xs mt-0.5 ${isLatest ? 'text-primary font-medium' : 'text-secondary'}`}>{displayTitle}</p>
                   </div>
                 </div>
               );
@@ -364,7 +371,7 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
                   <span className={`font-mono-label text-xs font-bold ${
                     (r.risk || 0) >= 70 ? 'text-error' : ((r.risk || 0) >= 50 ? 'text-[#7c3aed]' : 'text-[#2563eb]')
                   }`}>
-                    Risk {r.risk}
+                    Review Priority {r.risk}
                   </span>
                 </div>
               );

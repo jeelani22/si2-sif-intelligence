@@ -300,28 +300,28 @@ INITIAL_PATTERNS = [
         "currentRiskScore": 91,
         "maxScore": 100,
         "statusBadges": ["CRITICAL", "ESCALATED"],
-        "logicBanner": "Non-SIF reports remain in the intelligence pipeline. Recurring related observations + increasing risk trajectory = emerging Potential SIF risk.",
+        "logicBanner": "Non-SIF reports remain in the intelligence pipeline. Recurring related observations + increasing review-priority trajectory = emerging Potential-SIF concern.",
         "trajectoryPoints": [
             { "id": "R001", "risk": 22, "band": "NON-SIF" },
             { "id": "R017", "risk": 39, "band": "NON-SIF" },
             { "id": "R043", "risk": 57, "band": "NON-SIF" },
-            { "id": "R081", "risk": 76, "band": "RISING RISK" },
+            { "id": "R081", "risk": 76, "band": "RISING REVIEW PRIORITY" },
             { "id": "R104", "risk": 91, "band": "POTENTIAL SIF" }
         ],
         "checklist": [
             { "text": "Same location (Process Area A)", "checked": True },
             { "text": "Same equipment (Pump P-101)", "checked": True },
             { "text": "Same hazard", "checked": True },
-            { "text": "Related safety observations", "checked": True },
-            { "text": "Increasing frequency", "checked": True },
-            { "text": "Increasing risk scores", "checked": True, "isTrend": True }
+            { "text": "Repeated related observations", "checked": True },
+            { "text": "Increasing review-priority trajectory", "checked": True, "isTrend": True },
+            { "text": "Energy Isolation concern — Critical Life-Saving Rule", "checked": True, "isAlert": True }
         ],
         "timeline": [
-            { "id": "R001", "risk": 22, "badge": "INITIAL", "title": "Initial unsafe condition identified", "isLatest": False },
+            { "id": "R001", "risk": 22, "badge": "MONITORING", "title": "Initial unsafe condition identified", "isLatest": False },
             { "id": "R017", "risk": 39, "badge": "RELATED", "title": "Related observation reported", "isLatest": False },
-            { "id": "R043", "risk": 57, "badge": "RISING", "title": "Risk escalating due to proximity", "isLatest": False },
+            { "id": "R043", "risk": 57, "badge": "RISING", "title": "Review priority escalating due to proximity", "isLatest": False },
             { "id": "R081", "risk": 76, "badge": "PATTERN DETECTED", "title": "Recurring hazard pattern confirmed", "isLatest": False },
-            { "id": "R104", "risk": 91, "badge": "ESCALATED", "title": "Critical threshold reached - Potential SIF designated", "isLatest": True }
+            { "id": "R104", "risk": 91, "badge": "ESCALATED", "title": "Review-priority threshold reached — Potential SIF designated", "isLatest": True }
         ],
         "relatedReports": [
             { "id": "R081", "risk": 76 },
