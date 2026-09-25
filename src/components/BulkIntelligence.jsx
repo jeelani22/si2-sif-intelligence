@@ -81,7 +81,7 @@ export default function BulkIntelligence({ onNotification }) {
 
   const handleExportCSV = () => {
     const rows = [
-      ['Report ID', 'Report Type', 'Location', 'Equipment', 'Hazard', 'Risk', 'SIF Potential', 'Pattern Status', 'Life-Saving Rule', 'Case Status'],
+      ['Report ID', 'Report Type', 'Location', 'Equipment', 'Hazard', 'Review Priority', 'SIF Potential', 'Pattern Status', 'Life-Saving Rule', 'Case Status'],
       ...filteredReports.map((r) => [
         r.id, r.reportType, r.location, r.equipment, r.hazard, r.risk, r.sifPotential, r.patternStatus, r.lifeSavingRule, r.caseStatus
       ])
@@ -150,7 +150,7 @@ export default function BulkIntelligence({ onNotification }) {
           <span className="font-display-lg text-2xl text-[#ea580c] font-bold">{metrics.highRisk.toLocaleString()}</span>
         </div>
         <div className="bg-surface-container-lowest border border-outline-variant p-4 flex flex-col justify-between h-24">
-          <span className="font-label-md text-xs text-secondary uppercase font-bold tracking-wider">RISING RISK</span>
+          <span className="font-label-md text-xs text-secondary uppercase font-bold tracking-wider">RISING REVIEW PRIORITY</span>
           <span className="font-display-lg text-2xl text-[#dc2626] font-bold">{metrics.risingRisk.toLocaleString()}</span>
         </div>
         <div className="bg-surface-container-lowest border border-outline-variant p-4 flex flex-col justify-between h-24">
@@ -167,7 +167,7 @@ export default function BulkIntelligence({ onNotification }) {
             type="file" 
             accept=".csv,.xlsx,.xls" 
             className="absolute inset-0 opacity-0 cursor-pointer" 
-            onChange={handleFileUpload}
+            onChange={handleFileUpload} 
           />
           <span className="material-symbols-outlined text-3xl text-primary">cloud_upload</span>
           <div className="flex flex-col gap-0.5">
@@ -184,7 +184,7 @@ export default function BulkIntelligence({ onNotification }) {
             <span>➔</span>
             <span className="text-primary flex items-center gap-1"><strong className="text-primary">2</strong> Parse</span>
             <span>➔</span>
-            <span className="text-primary flex items-center gap-1"><strong className="text-primary">3</strong> SIF Score</span>
+            <span className="text-primary flex items-center gap-1"><strong className="text-primary">3</strong> Review Priority</span>
             <span>➔</span>
             <span className="text-primary flex items-center gap-1"><strong className="text-primary">4</strong> Cluster</span>
             <span>➔</span>
@@ -247,10 +247,10 @@ export default function BulkIntelligence({ onNotification }) {
           </div>
         </div>
 
-        {/* Right: Sample Risk Trajectory (5-col) */}
+        {/* Right: Sample Review-Priority Trajectory (5-col) */}
         <div className="lg:col-span-5 bg-surface-container-lowest border border-outline-variant p-5 flex flex-col justify-between gap-3">
           <div className="flex justify-between items-center">
-            <h2 className="font-label-md text-xs text-primary uppercase font-bold">SAMPLE RISK TRAJECTORY</h2>
+            <h2 className="font-label-md text-xs text-primary uppercase font-bold">SAMPLE REVIEW-PRIORITY TRAJECTORY</h2>
             <span className="text-xs text-error font-mono-label font-bold">Process Area A</span>
           </div>
 
@@ -285,6 +285,10 @@ export default function BulkIntelligence({ onNotification }) {
             <span>➔</span>
             <strong className="text-error">R104 (91)</strong>
           </div>
+
+          <p className="text-[10px] text-secondary/80 italic leading-tight pt-0.5">
+            Illustrative review-priority scores; not calibrated probabilities of injury or fatality.
+          </p>
         </div>
       </section>
 
@@ -320,7 +324,7 @@ export default function BulkIntelligence({ onNotification }) {
                 <th className="p-3">LOCATION</th>
                 <th className="p-3">EQUIPMENT</th>
                 <th className="p-3">HAZARD</th>
-                <th className="p-3">RISK</th>
+                <th className="p-3">REVIEW PRIORITY</th>
                 <th className="p-3">SIF POTENTIAL</th>
                 <th className="p-3">PATTERN STATUS</th>
                 <th className="p-3">LIFE-SAVING RULE</th>
@@ -382,8 +386,8 @@ export default function BulkIntelligence({ onNotification }) {
 
         {/* Footer */}
         <div className="p-3 border-t border-outline-variant flex justify-between items-center text-xs text-secondary bg-surface-container-low">
-          <span>Showing {filteredReports.length} prioritized reports</span>
-          <span className="font-mono-label">Dataset: OIL_Safety_Reports_Sep2026</span>
+          <span>Showing {filteredReports.length} prioritized reports from the recurring-pattern demonstration</span>
+          <span className="font-mono-label">Demo Dataset — OIL-style Safety Reports ({currentFileName})</span>
         </div>
       </section>
     </div>
