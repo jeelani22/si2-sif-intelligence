@@ -137,8 +137,15 @@ export default function RiskEvolution({ onNavigate, onNotification }) {
             <line x1="0" y1="150" x2="500" y2="150" stroke="#cbd5e1"/>
 
             <path d={pathD} fill="none" stroke="#000000" strokeWidth="3" className="trajectory-line"/>
-            {/* Highlight line between R081 and R104 in red */}
-            <path d="M 340,45 L 440,26" fill="none" stroke="#dc2626" strokeWidth="3"/>
+            {/* Highlight line between the last two points in red if rising into potential SIF */}
+            {svgCoords.length >= 2 && (
+              <path 
+                d={`M ${svgCoords[svgCoords.length - 2].x},${svgCoords[svgCoords.length - 2].y} L ${svgCoords[svgCoords.length - 1].x},${svgCoords[svgCoords.length - 1].y}`} 
+                fill="none" 
+                stroke="#dc2626" 
+                strokeWidth="3"
+              />
+            )}
 
             {svgCoords.map((pt) => {
               const isSelected = pt.id === selectedReportId;

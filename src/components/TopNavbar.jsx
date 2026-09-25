@@ -1,31 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function TopNavbar({ activeTab, setActiveTab }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const navItems = [
-    { id: 'command-center', label: 'Command Center' },
-    { id: 'analyze-report', label: 'Analyze Report' },
-    { id: 'bulk-intelligence', label: 'Bulk Intelligence' },
-    { id: 'cases', label: 'Cases' },
-    { id: 'risk-evolution', label: 'Risk Evolution' },
+    { id: 'command-center', label: 'Command Center', icon: 'dashboard' },
+    { id: 'analyze-report', label: 'Analyze Report', icon: 'edit_note' },
+    { id: 'bulk-intelligence', label: 'Bulk Intelligence', icon: 'upload_file' },
+    { id: 'cases', label: 'Cases', icon: 'assignment' },
+    { id: 'risk-evolution', label: 'Risk Evolution', icon: 'trending_up' },
   ];
 
+  const handleNavClick = (id) => {
+    setActiveTab(id);
+    setMobileMenuOpen(false);
+  };
+
   return (
-    <nav className="bg-surface-container-lowest border-b border-outline-variant w-full h-12 flex-shrink-0 z-30 sticky top-0">
-      <div className="flex justify-between items-center px-container-padding w-full max-w-[1920px] mx-auto h-full">
-        <div className="flex items-center gap-6 h-full">
-          <span 
-            onClick={() => setActiveTab('command-center')} 
-            className="font-headline-md text-headline-md font-bold text-primary tracking-tight select-none cursor-pointer"
+    <nav className="bg-surface-container-lowest border-b border-outline-variant w-full flex-shrink-0 z-30 sticky top-0">
+      <div className="flex justify-between items-center px-container-padding w-full max-w-[1920px] mx-auto h-12">
+        <div className="flex items-center gap-4 md:gap-6 h-full">
+          {/* Mobile hamburger */}
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden text-primary p-1 rounded hover:bg-surface-container transition-colors"
+            title="Toggle Menu"
           >
+            <span className="material-symbols-outlined text-xl">
+              {mobileMenuOpen ? 'close' : 'menu'}
+            </span>
+          </button>
+
+          <span 
+            onClick={() => handleNavClick('command-center')} 
+            className="font-headline-md text-headline-md font-bold text-primary tracking-tight select-none cursor-pointer flex items-center gap-2"
+          >
+            <span className="w-2.5 h-2.5 rounded-full bg-error inline-block animate-pulse"></span>
             SIF Intelligence
           </span>
+
           <div className="hidden md:flex gap-6 h-full items-center pt-1">
             {navItems.map((item) => {
               const isActive = activeTab === item.id;
               return (
                 <button
                   key={item.id}
-                  onClick={() => setActiveTab(item.id)}
+                  onClick={() => handleNavClick(item.id)}
                   className={`font-label-md text-label-md h-full flex items-center cursor-pointer transition-colors duration-150 ${
                     isActive
                       ? 'text-primary border-b-2 border-primary font-semibold pb-1 pt-1'
@@ -39,7 +59,7 @@ export default function TopNavbar({ activeTab, setActiveTab }) {
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 md:gap-4">
           {/* Search bar on desktop */}
           <div className="hidden lg:flex items-center relative">
             <input
@@ -72,6 +92,29 @@ export default function TopNavbar({ activeTab, setActiveTab }) {
           </div>
         </div>
       </div>
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-surface-container-lowest border-t border-outline-variant px-4 py-3 flex flex-col gap-2 shadow-lg animate-fade-in">
+          {navItems.map((item) => {
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`flex items-center gap-3 px-3 py-2 rounded text-xs font-bold transition-colors ${
+                  isActive
+                    ? 'bg-primary text-on-primary'
+                    : 'text-secondary hover:bg-surface-container hover:text-primary'
+                }`}
+              >
+                <span className="material-symbols-outlined text-sm">{item.icon}</span>
+                {item.label}
+              </button>
+            );
+          })}
+        </div>
+      )}
     </nav>
   );
 }
