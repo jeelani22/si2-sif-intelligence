@@ -1,4 +1,4 @@
-# SIF Intelligence Safety Command Center (SIH 2026 MVP)
+# DRISHTI-SIF Safety Command Center (SIH 2026 MVP)
 
 Early detection and continuous monitoring of Severe Injury & Fatality (SIF) precursors in industrial operations.
 
@@ -15,7 +15,7 @@ Standard safety dashboards suffer from:
 ---
 
 ## 💡 Solution Overview
-**SIF Intelligence** is an enterprise safety command center providing continuous precursor intelligence across 5 core workflows:
+**DRISHTI-SIF** is an enterprise safety command center providing continuous precursor intelligence across 5 core workflows:
 
 1. **Command Center**: High-level operational awareness, real-time KPI metrics, emerging risk alerts, risk overview distribution bars, and active SIF cases.
 2. **Analyze Report**: Single-report SIF precursor evaluation using an explainable rule-based intelligence engine cross-referenced against historical observations.

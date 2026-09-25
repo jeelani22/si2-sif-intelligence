@@ -16,7 +16,7 @@ from app.routes.patterns import router as patterns_router
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="Backend API for SIF Intelligence Safety Command Center MVP"
+    description="Backend API for DRISHTI-SIF Safety Command Center MVP"
 )
 
 # Enable CORS for React Frontend (port 3000, 5173, etc.)
@@ -37,7 +37,7 @@ app.include_router(patterns_router, prefix="/api")
 @app.get("/")
 def root():
     return {
-        "message": "SIF Intelligence Safety Command Center API is running",
+        "message": "DRISHTI-SIF Safety Command Center API is running",
         "docs": "/docs",
         "health": "/api/health"
     }

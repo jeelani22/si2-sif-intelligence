@@ -8,7 +8,7 @@ def get_health():
     db = get_database()
     return {
         "status": "online",
-        "service": "SIF Intelligence API",
+        "service": "DRISHTI-SIF API",
         "database": "mongodb" if db is not None else "in-memory-store",
         "version": "1.0.0"
     }

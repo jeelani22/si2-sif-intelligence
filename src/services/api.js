@@ -1,5 +1,5 @@
 /**
- * SIF Intelligence API Client
+ * DRISHTI-SIF API Client
  * Connects frontend React components to FastAPI backend REST endpoints
  */
 

@@ -36,7 +36,7 @@ export default function TopNavbar({ activeTab, setActiveTab }) {
             className="font-headline-md text-headline-md font-bold text-primary tracking-tight select-none cursor-pointer flex items-center gap-2"
           >
             <span className="w-2.5 h-2.5 rounded-full bg-error inline-block animate-pulse"></span>
-            SIF Intelligence
+            DRISHTI-SIF
           </span>
 
           <div className="hidden md:flex gap-6 h-full items-center pt-1">

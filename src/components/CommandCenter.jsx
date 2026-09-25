@@ -37,7 +37,7 @@ export default function CommandCenter({ onSelectCase, onNavigate }) {
     <div className="flex-grow flex flex-col p-container-padding gap-5 max-w-[1920px] mx-auto w-full">
       {/* Header */}
       <header className="flex flex-col gap-0.5">
-        <h1 className="font-display-lg text-[28px] text-primary font-bold tracking-tight">SIF Safety Command Center</h1>
+        <h1 className="font-display-lg text-[28px] text-primary font-bold tracking-tight">DRISHTI-SIF Safety Command Center</h1>
         <p className="font-body-md text-sm text-secondary">Early detection and continuous monitoring of potential SIF precursors</p>
       </header>
 
