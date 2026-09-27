@@ -5,6 +5,7 @@ import AnalyzeReport from './components/AnalyzeReport';
 import BulkIntelligence from './components/BulkIntelligence';
 import Cases from './components/Cases';
 import RiskEvolution from './components/RiskEvolution';
+import Disclaimer from './components/Disclaimer';
 
 export default function App() {
   const getInitialTab = () => {
@@ -82,6 +83,9 @@ export default function App() {
           <RiskEvolution onNavigate={setActiveTab} onNotification={showToast} />
         )}
       </main>
+
+      {/* Fixed Prototype Disclaimer */}
+      <Disclaimer />
 
       {/* Toast Notification */}
       {toastMessage && (
