@@ -59,7 +59,7 @@ export default function TopNavbar({ activeTab, setActiveTab }) {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 md:gap-4">
+        <div className="flex items-center">
           {/* Search bar on desktop */}
           <div className="hidden lg:flex items-center relative">
             <input
@@ -70,25 +70,6 @@ export default function TopNavbar({ activeTab, setActiveTab }) {
             <span className="material-symbols-outlined text-secondary text-sm absolute right-2 pointer-events-none">
               search
             </span>
-          </div>
-
-          <button className="text-on-surface-variant hover:bg-surface-container p-1 rounded transition-colors duration-150 relative" title="Notifications">
-            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>notifications</span>
-            <span className="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
-          </button>
-          
-          <button className="text-on-surface-variant hover:bg-surface-container p-1 rounded transition-colors duration-150" title="System Settings">
-            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>settings</span>
-          </button>
-          
-          <div className="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant overflow-hidden cursor-pointer active:opacity-80 transition-opacity flex items-center justify-center bg-slate-300" title="HSE Safety Director">
-            <img 
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&h=64" 
-              alt="Avatar" 
-              className="w-full h-full object-cover" 
-              onError={(e) => { e.target.style.display = 'none'; }}
-            />
-            <span className="material-symbols-outlined text-on-surface-variant text-sm">person</span>
           </div>
         </div>
       </div>
